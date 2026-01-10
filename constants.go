@@ -11,12 +11,12 @@ import (
 	"vencord/buildinfo"
 )
 
-const ReleaseUrl = "https://api.github.com/repos/Equicord/Equicord/releases/latest"
-const ReleaseUrlFallback = "https://equicord.org/releases/equicord"
-const InstallerReleaseUrl = "https://api.github.com/repos/Equicord/Equilotl/releases/latest"
-const InstallerReleaseUrlFallback = "https://equicord.org/releases/equilotl"
+const ReleaseUrl = "https://api.github.com/repos/felixgoff/Neocord/releases/latest"
+const ReleaseUrlFallback = "https://example.com"
+const InstallerReleaseUrl = "https://api.github.com/repos/felixgoff/Neolotl/releases/latest"
+const InstallerReleaseUrlFallback = "https://example.com"
 
-var UserAgent = "Equilotl/" + buildinfo.InstallerGitHash + " (https://github.com/Equicord/Equilotl)"
+var UserAgent = "Neolotl/" + buildinfo.InstallerGitHash + " (https://github.com/felixgoff/Neolotl)"
 
 var (
 	DiscordGreen  = color.RGBA{R: 0x2D, G: 0x7C, B: 0x46, A: 0xFF}
@@ -43,3 +43,4 @@ var LinuxDiscordNames = []string{
 	"com.discordapp.DiscordCanary",
 	"com.discordapp.DiscordDevelopment",
 }
+
