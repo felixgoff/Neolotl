@@ -5,6 +5,7 @@ on:
   push:
     tags:
       - v*
+  workflow_dispatch:
 
 env:
   FORCE_COLOR: true
@@ -217,3 +218,4 @@ jobs:
             linux/NeolotlCli-linux
             macos/Neolotl.MacOS.zip
             windows/Neolotl*.exe
+
