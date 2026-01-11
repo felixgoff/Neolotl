@@ -43,22 +43,21 @@ jobs:
         run: go get -v
 
       - name: Build GUI
-        run: CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -v -tags "static gui" -ldflags "-s -w -X 'vencord/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'vencord/buildinfo.InstallerTag=${{ github.ref_name }}'" -o Equilotl-x11
+        run: CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -v -tags "static gui" -ldflags "-s -w -X 'vencord/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'vencord/buildinfo.InstallerTag=${{ github.ref_name }}'" -o Neolotl-x11
 
       - name: Build CLI
-        run: CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -v -tags "cli" -ldflags "-s -w -X 'vencord/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'vencord/buildinfo.InstallerTag=${{ github.ref_name }}'" -o EquilotlCli-linux
+        run: CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -v -tags "cli" -ldflags "-s -w -X 'vencord/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'vencord/buildinfo.InstallerTag=${{ github.ref_name }}'" -o NeolotlCLI-linux
 
       - name: Update executable
         run: |
-          chmod +x Equilotl*
-
+          chmod +x Neolotl*
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Equilotl-linux
+          name: Neolotl-linux
           path: |
-            Equilotl-x11
-            EquilotlCli-linux
+            Neolotl-x11
+            NeolotlCLI-linux
 
   build-mac:
     runs-on: macos-latest
@@ -93,27 +92,26 @@ jobs:
         run: go get -v
 
       - name: Build GUI
-        run: CGO_CFLAGS="-mmacosx-version-min=10.15" CGO_LDFLAGS="-mmacosx-version-min=10.15" CGO_ENABLED=1 GOOS=darwin GOARCH=amd64 go build -v -tags "static gui" -ldflags "-s -w -X 'vencord/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'vencord/buildinfo.InstallerTag=${{ github.ref_name }}'" -o Equilotl
+        run: CGO_CFLAGS="-mmacosx-version-min=10.15" CGO_LDFLAGS="-mmacosx-version-min=10.15" CGO_ENABLED=1 GOOS=darwin GOARCH=amd64 go build -v -tags "static gui" -ldflags "-s -w -X 'vencord/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'vencord/buildinfo.InstallerTag=${{ github.ref_name }}'" -o Neolotl
 
       - name: Update executable
         run: |
-          chmod +x Equilotl*
+          chmod +x Neolotl*
 
       - name: Generate MacOS GUI bundle
         run: |
-          mkdir -p Equilotl.app/Contents/MacOS
-          mkdir -p Equilotl.app/Contents/Resources
-          cp macos/Info.plist Equilotl.app/Contents/Info.plist
-          mv Equilotl Equilotl.app/Contents/MacOS/Equilotl
-          cp macos/icon.icns Equilotl.app/Contents/Resources/icon.icns
-          zip -r Equilotl.MacOS.zip Equilotl.app
-
+          mkdir -p Neolotl.app/Contents/MacOS
+          mkdir -p Neolotl.app/Contents/Resources
+          cp macos/Info.plist Neolotl.app/Contents/Info.plist
+          mv Neolotl Neolotl.app/Contents/MacOS/Neolotl
+          cp macos/icon.icns Neolotl.app/Contents/Resources/icon.icns
+          zip -r Neolotl.MacOS.zip Neolotl.app
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Equilotl-macos
+          name: Neolotl-macos
           path: |
-            Equilotl.MacOS.zip
+            Neolotl.MacOS.zip
 
   build-windows:
     runs-on: windows-latest
@@ -160,22 +158,22 @@ jobs:
           export GOROOT=/mingw64/lib/go
           export GOPATH=/mingw64
           go-winres make --product-version "git-tag"
-          CGO_ENABLED=1 GOOS=windows GOARCH=amd64 go build -v -tags "static gui" -ldflags "-s -w -H=windowsgui -extldflags=-static -X 'vencord/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'vencord/buildinfo.InstallerTag=${{ github.ref_name }}'" -o Equilotl.exe
+          CGO_ENABLED=1 GOOS=windows GOARCH=amd64 go build -v -tags "static gui" -ldflags "-s -w -H=windowsgui -extldflags=-static -X 'vencord/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'vencord/buildinfo.InstallerTag=${{ github.ref_name }}'" -o Neolotl.exe
 
       - name: Build CLI
         shell: msys2 {0}
         run: |
           export GOROOT=/mingw64/lib/go
           export GOPATH=/mingw64
-          CGO_ENABLED=1 GOOS=windows GOARCH=amd64 go build -v -tags "cli" -ldflags "-s -w -X 'vencord/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'vencord/buildinfo.InstallerTag=${{ github.ref_name }}'" -o EquilotlCli.exe
+          CGO_ENABLED=1 GOOS=windows GOARCH=amd64 go build -v -tags "cli" -ldflags "-s -w -X 'vencord/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'vencord/buildinfo.InstallerTag=${{ github.ref_name }}'" -o NeolotlCli.exe
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Equilotl-windows
+          name: Neolotl-windows
           path: |
-            Equilotl.exe
-            EquilotlCli.exe
+            Neolotl.exe
+            NeolotlCli.exe
 
   release:
     runs-on: ubuntu-latest
@@ -188,19 +186,19 @@ jobs:
       - name: "Download Linux Artifacts"
         uses: actions/download-artifact@v4
         with:
-          name: Equilotl-linux
+          name: Neolotl-linux
           path: linux
 
       - name: "Download MacOS Artifacts"
         uses: actions/download-artifact@v4
         with:
-          name: Equilotl-macos
+          name: Neolotl-macos
           path: macos
 
       - name: "Download Windows Artifacts"
         uses: actions/download-artifact@v4
         with:
-          name: Equilotl-windows
+          name: Neolotl-windows
           path: windows
 
       - name: Create the release
@@ -213,9 +211,9 @@ jobs:
           prerelease: false
           draft: false
           body: |
-            This is release ${{ github.ref_name }} of Equilotl.
+            This is release ${{ github.ref_name }} of Neolotl.
           files: |
-            linux/Equilotl-x11
-            linux/EquilotlCli-linux
-            macos/Equilotl.MacOS.zip
-            windows/Equilotl*.exe
+            linux/Neolotl-x11
+            linux/NeolotlCli-linux
+            macos/Neolotl.MacOS.zip
+            windows/Neolotl*.exe

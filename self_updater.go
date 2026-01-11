@@ -46,15 +46,15 @@ func init() {
 }
 
 func GetInstallerDownloadLink() string {
-	const BaseUrl = "https://github.com/Equicord/Equilotl/releases/latest/download/"
+	const BaseUrl = "https://github.com/felixgoff/Neolotl/releases/latest/download/"
 	switch runtime.GOOS {
 	case "windows":
-		filename := Ternary(buildinfo.UiType == buildinfo.UiTypeCli, "EquilotlCli.exe", "Equilotl.exe")
+		filename := Ternary(buildinfo.UiType == buildinfo.UiTypeCli, "NeolotlCLI.exe", "Neolotl.exe")
 		return BaseUrl + filename
 	case "darwin":
-		return BaseUrl + "Equilotl.MacOS.zip"
+		return BaseUrl + "Neolotl.MacOS.zip"
 	case "linux":
-		return BaseUrl + "EquilotlCli-linux"
+		return BaseUrl + "NeolotlCLI-linux"
 	default:
 		return ""
 	}
@@ -90,7 +90,7 @@ func UpdateSelf() error {
 	}
 	defer res.Body.Close()
 
-	tmp, err := os.CreateTemp(ownExeDir, "EquilotlUpdate")
+	tmp, err := os.CreateTemp(ownExeDir, "NeolotlUpdate")
 	if err != nil {
 		return fmt.Errorf("Failed to create tempfile: %w", err)
 	}

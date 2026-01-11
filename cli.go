@@ -63,7 +63,7 @@ func main() {
 	}
 
 	if *versionFlag {
-		fmt.Println("Equilotl Cli", buildinfo.InstallerTag, "("+buildinfo.InstallerGitHash+")")
+		fmt.Println("Neolotl Cli", buildinfo.InstallerTag, "("+buildinfo.InstallerGitHash+")")
 		fmt.Println("Copyright (C) 2025 Vendicated and Vencord contributors")
 		fmt.Println("License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>.")
 		return
@@ -103,18 +103,18 @@ func main() {
 			<-SelfUpdateCheckDoneChan
 			if IsSelfOutdated {
 				Log.Warn("Your installer is outdated.")
-				Log.Warn("To update, select the 'Update Equilotl' option to update, or run with --update-self")
+				Log.Warn("To update, select the 'Update Neolotl' option to update, or run with --update-self")
 			}
 		}()
 
 		choices := []string{
-			"Install Equicord",
-			"Repair Equicord",
-			"Uninstall Equicord",
+			"Install Neolotl",
+			"Repair Neolotl",
+			"Uninstall Neolotl",
 			"Install OpenAsar",
 			"Uninstall OpenAsar",
 			"View Help Menu",
-			"Update Equilotl",
+			"Update Neolotl",
 			"Quit",
 		}
 		_, choice, err := (&promptui.Select{
@@ -129,7 +129,7 @@ func main() {
 			return
 		case "Quit":
 			return
-		case "Update Equilotl":
+		case "Update Neolotl":
 			if err := UpdateSelf(); err != nil {
 				Log.Error("Failed to update self:", err)
 				exitFailure()
